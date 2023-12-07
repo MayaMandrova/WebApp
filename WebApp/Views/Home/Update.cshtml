@@ -1,0 +1,34 @@
+@model ProductModel;
+
+@{
+    ViewData["Home"] = "WebApp";
+    Layout = "_Layout";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+    <h1 class="display-4"></h1>
+    <br/>
+    <h4>Edit product:</h4>
+    <form action="@Url.Action("ChangeProduct", "Home")" method="Post">
+        <input type="hidden" name="id" value="@(Model.Id)"/><br/>
+        Name:<br/>
+        <input type="text" placeholder="Enter the name" name="name" value="@Model.Name"/><br/>
+        Discription:<br/>
+        <input type="text" placeholder="Enter the discription" name="description" value="@Model.Description"/><br/>
+        Price for piece:<br/>
+        <input type="number" step="0.01" placeholder="Enter the price for piece" name="priceForPiece" value="@Model.PriceForPiece"/><br/>
+        Quantity:<br/>
+        <input type="number" placeholder="Enter quantity" name="quantity" value="@Model.Quantity"/><br/>
+        <br/>
+        <input type="submit" value="Edit"/>
+    </form>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+</div>

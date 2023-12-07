@@ -1,0 +1,83 @@
+@model ListProductsModel;
+
+@{
+    ViewData["Home"] = "Random table";
+    Layout = "_Layout";
+    var products = Model.Products;
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+    <h1 class="display-4">
+        <b>Table for edit</b>
+    </h1>
+    <table style="margin: auto; border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black;">
+                <b>Id</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Name</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Description</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Price for piece</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Quantity</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Action</b>
+            </th>
+        </tr>
+
+        @for (int i = 0; i < products.Count; i++)
+        {
+            <tr style="border: 1px solid black;">
+                <td style="border: 1px solid grey;">@products[i].Id</td>
+                <td style="border: 1px solid grey;">@products[i].Name</td>
+                <td style="border: 1px solid grey;">@products[i].Description</td>
+                <td style="border: 1px solid grey;">@products[i].PriceForPiece</td>
+                <td style="border: 1px solid grey;">@products[i].Quantity</td>
+                <td style="border: 1px solid grey;">
+                    <form action="@Url.Action("GetProduct", "Home")" method="Get">
+                        <button type="submit" name="id" value="@products[i].Id">✎</button><br/>
+                    </form>
+                    <form action="@Url.Action("DeleteProduct", "Home")" method="Post">
+                    <button type="submit" name="id" value="@products[i].Id">⌫</button><br/>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h4>Add new product:</h4>
+    <form action="@Url.Action("CreateNewProductFromUser", "Home")" method="Post">
+        <input type="hidden" name="id" value="@(products.Last().Id)"/><br/>
+        Name:<br/>
+        <input type="text" placeholder="Enter the name" name="name"/><br/>
+        Description:<br/>
+        <input type="text" placeholder="Enter description" name="description"/><br/>
+        Price for piece:<br/>
+        <input type="number" step="0.01" placeholder="Enter price for piece" name="priceForPiece"/><br/>
+        Quantity:<br/>
+        <input type="number" placeholder="Enter quantity" name="quantity"/><br/>
+        <br/>
+        <input type="submit" value="Create"/>
+    </form>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+</div>
+
+<p>Default copywriting checking</p>
